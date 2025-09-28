@@ -64,6 +64,8 @@ def editar_aluno(nome):
 
 @alunos_bp.route("/deletar/<nome>")
 def deletar_aluno(nome):
+    aluno = Aluno.query.filter_by(nome=nome).first()
     if nome:
-        AlunoController.delete(nome)
+        AlunoController.delete(aluno.id)
+        flash("Aluno deletado!")
     return redirect(url_for('aluno_rota.listar_alunos'))

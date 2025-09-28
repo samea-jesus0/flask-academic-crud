@@ -9,8 +9,8 @@ class AlunoController:
         return alunos
 
     @staticmethod
-    def delete(aluno):
-        aluno = Aluno.query.get(aluno.id)
+    def delete(id):
+        aluno = Aluno.query.filter_by(id=id).first()
         if aluno:
             db.session.delete(aluno)
             db.session.commit()
