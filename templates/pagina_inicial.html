@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+
+        </nav>
+    </header>
+    <main>
+
+        <div>
+            <h2>Alunos</h2>
+            <a href="{{ url_for('aluno_rota.listar_alunos') }}">LISTAR ALUNOS</a> <br>
+            <a href="{{ url_for('aluno_rota.cadastrar_aluno') }}">CRIAR ALUNOS</a>
+        </div>
+
+        <div>
+            <h2>Professor</h2>
+
+            <a href="{{ url_for('professor_rota.listar_professores') }}">Listar Professores</a>
+            <a href="{{ url_for('professor_rota.cadastrar_professor') }}">Cadastrar Professores</a>
+
+        </div>
+
+
+    </main>
+
+</body>
+</html>

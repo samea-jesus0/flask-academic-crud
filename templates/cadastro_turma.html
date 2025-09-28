@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <input type="hidden" value=""> <!-- colocar o id da turma caso queira editar? -->
+        <label></label>
+        <input type="text" name="descricao">
+
+        <fieldset>
+          <legend>Selecione um professor: </legend>
+
+            {% if professor in professores%}
+          {% for professor in professores %}
+          <div>
+            <input type="radio" id="professor" name="{{ professor.nome }}" value="{{ professor.id }}" checked />
+            <label for="professor">professor.nome</label>
+          </div>
+          {% endfor %}
+            {% else %}
+            <div>
+                <p>Professores não cadastrados, é necessário ter pelo menos um professor para cadastraar uma turma.</p>
+            </div>
+        </fieldset>
+            {% endif %}
+
+        <label></label>
+        <input type="text" name="ativo">
+    </form>
+
+</body>
+</html>

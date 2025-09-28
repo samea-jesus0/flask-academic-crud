@@ -1,0 +1,20 @@
+{% extends 'template.html' %}
+{% block conteudo %}
+
+    <form class="form" method="POST" action="{{ url_for('professor_rota.criar_professor', nome=professor.nome) }}">
+        <label class="form-label">Nome do Professor</label>
+        <input class="form-control" type="text" name="nome" value="{{ professor.nome if professor else '' }}">
+
+        <label class="form-label">Idade</label>
+        <input class="form-control" type="text" name="idade" value="{{ professor.idade if professor else '' }}">
+
+        <label class="form-label">Materia</label>
+        <input class="form-control" type="text" name="materia" value="{{ professor.materia if professor else '' }}">
+
+        <label class="form-label">Observações</label>
+        <input class="form-control" type="text" name="observacoes" value="{{ professor.observacoes if professor else '' }}">
+
+        <button class="btn btn-primary btn-block mb-4" type="submit">Enviar</button>
+    </form>
+
+{% endblock %}

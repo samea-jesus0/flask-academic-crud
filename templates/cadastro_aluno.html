@@ -1,0 +1,38 @@
+{% extends 'template.html' %}
+{% block conteudo %}
+    <form class="form" method="POST" action="{{ url_for('aluno_rota.criar_aluno') }}">
+        <label class="form-label" for="nome_aluno">Nome do Aluno</label>
+        <input type="text" id="nome_aluno" name="nome" required>
+
+        <label class="form-label" for="idade_aluno">Idade </label>
+        <input class="form-control" id="idade_aluno" type="number" name="idade"required>
+
+        <fieldset>
+          <legend>Selecione uma turma: </legend>
+
+          {% for turma in turmas %}
+          <div>
+            <input class="form-control" type="radio" id="turmas" name="turma" value="{{ turma.id }}" checked required/>
+            <label class="form-label" for="turmas">{{ turma.observacoes }}</label>
+          </div>
+          {% endfor %}
+
+        </fieldset>
+
+        <label class="form-label" >Data de Nascimento</label>
+        <input class="form-control" type="date" name="data_nasc"required>
+
+        <label class="form-label">Nota do Primeiro Semestre</label>
+        <input class="form-control" type="number" name="nota_semestre_um">
+
+        <label class="form-label" >Nota do Segundo Semestre</label>
+        <input class="form-control" type="number" name="nota_semestre_dois">
+
+        <label class="form-label">Média Final</label>
+        <!-- Tem como já calcular a média aqui se já tiver os número?  -->
+        <input class="form-control" type="text" name="media_final">
+
+        <button class="btn btn-primary btn-block mb-4" type="submit"> Envie </button>
+
+    </form>
+{% endblock %}

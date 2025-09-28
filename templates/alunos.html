@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Alunos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{{ url_for('pagina_inicial') }}">Página Inicial</a>
+        </nav>
+    </header>
+
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+        <div>
+            <h1>{{ titulo }}</h1>
+        </div>
+        <div class="table-responsive" style="width: 75%;">
+            <table class="table table-striped table-hover text-center">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data de Nascimento</th>
+                        <th>Primeiro Semestre</th>
+                        <th>Segundo Semestre</th>
+                        <th>Média Final</th>
+                        <th>EDITAR</th>
+                        <th>DELETAR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aluno in alunos %}
+                    <tr>
+                        <td>{{ aluno.nome }}</td>
+                        <td>{{ aluno.data_nascimento.strftime("%d/%m/%Y") }}</td>
+                        <td>{{ aluno.nota_primeiro_semestre }}</td>
+                        <td>{{ aluno.nota_segundo_semestre }}</td>
+                        <td>{{ aluno.media_final }}</td>
+                        <td><a href="{{ url_for('aluno_rota.editar_aluno', nome=aluno.nome) }}" class="btn btn-danger btn-sm">EDITAR</a></td>
+                        <td><a href="{{ url_for('aluno_rota.deletar_aluno', nome=aluno.nome) }}" class="btn btn-danger btn-sm">DELETAR</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
