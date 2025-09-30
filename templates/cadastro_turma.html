@@ -1,35 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form>
-        <input type="hidden" value=""> <!-- colocar o id da turma caso queira editar? -->
-        <label></label>
-        <input type="text" name="descricao">
+{% extends 'template.html' %}
+{% block conteudo %}
 
-        <fieldset>
-          <legend>Selecione um professor: </legend>
+      <form method="POST" action="{% if turma %}{{ url_for('turma_rota.editar_turma', nome=turma.descricao) }}{% else %}{{ url_for('turma_rota.criar_turma') }}{% endif %}">
 
-            {% if professor in professores%}
+        <!-- Descrição -->
+        <div class="mb-3">
+          <label class="form-label">Descrição da Turma</label>
+          <input class="form-control" type="text" name="descricao" value="{{ turma.descricao if turma else '' }}" required>
+        </div>
+
+        <!-- Professores -->
+        <fieldset class="mb-3">
+          <legend class="col-form-label pt-0">Selecione um professor:</legend>
           {% for professor in professores %}
-          <div>
-            <input type="radio" id="professor" name="{{ professor.nome }}" value="{{ professor.id }}" checked />
-            <label for="professor">professor.nome</label>
-          </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" id="professor_{{ professor.id }}" name="professor" value="{{ professor.id }}" {% if loop.first %}checked{% endif %} required>
+                <label class="form-check-label" for="professor_{{ professor.id }}">{{ professor.nome }}</label>
+              </div>
           {% endfor %}
-            {% else %}
-            <div>
-                <p>Professores não cadastrados, é necessário ter pelo menos um professor para cadastraar uma turma.</p>
-            </div>
         </fieldset>
-            {% endif %}
 
-        <label></label>
-        <input type="text" name="ativo">
-    </form>
+        <!-- Ativo -->
+        <div class="form-check mb-3">
+          <input class="form-check-input" id="checkbox-ativo" type="checkbox" name="ativo" required>
+          <label class="form-check-label" for="checkbox-ativo">Ativo</label>
+        </div>
 
-</body>
-</html>
+        <!-- Botão -->
+        <button class="btn btn-primary w-100" type="submit">Enviar</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,8 +1,8 @@
 {% extends 'template.html' %}
 {% block conteudo %}
-    <form class="form" method="POST" action="{{ url_for('aluno_rota.criar_aluno') }}">
+    <form class="form" method="POST" action="{% if aluno %}{{ url_for('aluno_rota.editar_aluno', nome=aluno.nome) }}{% else %}{{ url_for('aluno_rota.criar_aluno') }}{% endif %}">
         <label class="form-label" for="nome_aluno">Nome do Aluno</label>
-        <input type="text" id="nome_aluno" name="nome" required>
+        <input class="form-control" type="text" id="nome_aluno" name="nome" value="{{ aluno.nome if aluno else '' }}" required>
 
         <label class="form-label" for="idade_aluno">Idade </label>
         <input class="form-control" id="idade_aluno" type="number" name="idade"required>
@@ -12,8 +12,8 @@
 
           {% for turma in turmas %}
           <div>
-            <input class="form-control" type="radio" id="turmas" name="turma" value="{{ turma.id }}" checked required/>
-            <label class="form-label" for="turmas">{{ turma.observacoes }}</label>
+            <input class="form-control" type="radio" id="turmas" name="turma" value="{{ turma.id }}" {% if loop.first %}checked{% endif %}/>
+            <label class="form-label" for="turmas">{{ turma.descricao }}</label>
           </div>
           {% endfor %}
 
@@ -29,7 +29,6 @@
         <input class="form-control" type="number" name="nota_semestre_dois">
 
         <label class="form-label">Média Final</label>
-        <!-- Tem como já calcular a média aqui se já tiver os número?  -->
         <input class="form-control" type="text" name="media_final">
 
         <button class="btn btn-primary btn-block mb-4" type="submit"> Envie </button>

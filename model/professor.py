@@ -8,5 +8,5 @@ class Professor(db.Model):
     materia = db.Column(db.String(100), nullable=True)
     observacoes = db.Column(db.Text, nullable=True)
 
-    turmas = db.relationship("Turma")
+    turmas = db.relationship("Turma", back_populates="professor")
 

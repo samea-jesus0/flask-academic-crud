@@ -8,8 +8,8 @@ class TurmaController:
         return turmas
 
     @staticmethod
-    def delete(turma):
-        turma = Turma.query.get(turma.id)
+    def delete(id):
+        turma = Turma.query.filter_by(id=id).first()
         if turma:
             db.session.delete(turma)
             db.session.commit()

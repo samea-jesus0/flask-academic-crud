@@ -11,5 +11,6 @@ class Aluno(db.Model):
     nota_segundo_semestre =db.Column(db.Float, nullable=True)
     media_final = db.Column(db.Float, nullable=True)
 
+
     turma_id = db.Column(db.Integer, db.ForeignKey("turmas.id"), nullable=False)
-    turma = db.relationship("Turma")
+    turma = db.relationship("Turma", back_populates="alunos")

@@ -1,34 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Gerenciador Escolar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
 </head>
-<body>
-
+<body class="bg-light">
     <header>
-        <nav>
-
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">Gerenciador Escolar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                        data-bs-target="#navbarNav" aria-controls="navbarNav" 
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
         </nav>
     </header>
-    <main>
 
-        <div>
-            <h2>Alunos</h2>
-            <a href="{{ url_for('aluno_rota.listar_alunos') }}">LISTAR ALUNOS</a> <br>
-            <a href="{{ url_for('aluno_rota.cadastrar_aluno') }}">CRIAR ALUNOS</a>
+    <main class="container my-5">
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="card-title h4 mb-3">Alunos</h2>
+                        <a href="{{ url_for('aluno_rota.listar_alunos') }}" class="btn btn-outline-primary w-100 mb-2">
+                            Listar Alunos
+                        </a>
+                        <a href="{{ url_for('aluno_rota.cadastrar_aluno') }}" class="btn btn-primary w-100">
+                            Criar Aluno
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="card-title h4 mb-3">Professores</h2>
+                        <a href="{{ url_for('professor_rota.listar_professores') }}" class="btn btn-outline-primary w-100 mb-2">
+                            Listar Professores
+                        </a>
+                        <a href="{{ url_for('professor_rota.cadastrar_professor') }}" class="btn btn-primary w-100">
+                            Cadastrar Professor
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h2 class="card-title h4 mb-3">Turmas</h2>
+                        <a href="{{ url_for('turma_rota.listar_turmas') }}" class="btn btn-outline-primary w-100 mb-2">
+                            Listar Turmas
+                        </a>
+                        <a href="{{ url_for('turma_rota.cadastrar_turma') }}" class="btn btn-primary w-100">
+                            Cadastrar Turma
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-        <div>
-            <h2>Professor</h2>
-
-            <a href="{{ url_for('professor_rota.listar_professores') }}">Listar Professores</a>
-            <a href="{{ url_for('professor_rota.cadastrar_professor') }}">Cadastrar Professores</a>
-
-        </div>
-
-
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+```

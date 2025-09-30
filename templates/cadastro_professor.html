@@ -1,7 +1,7 @@
 {% extends 'template.html' %}
 {% block conteudo %}
 
-    <form class="form" method="POST" action="{{ url_for('professor_rota.criar_professor', nome=professor.nome) }}">
+    <form class="form" method="POST" action="{% if professor %}{{ url_for('professor_rota.editar_professor', nome=professor.nome) }}{% else %}{{ url_for('professor_rota.criar_professor') }}{% endif %}">
         <label class="form-label">Nome do Professor</label>
         <input class="form-control" type="text" name="nome" value="{{ professor.nome if professor else '' }}">
 
