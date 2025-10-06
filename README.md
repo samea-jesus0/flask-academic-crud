@@ -1,99 +1,120 @@
-# 📚 Sistema Escolar em Flask
 
-Um sistema simples para gerenciar **alunos**, **professores** e **turmas**, desenvolvido em **Flask** com **SQLAlchemy**.
-Permite **criar, listar, editar e excluir** registros de alunos, professores e turmas.
+## 🎯 Projeto: API de Gerenciamento Escolar
 
----
-
-## 🚀 Tecnologias usadas
-
-* **Python 3**
-* **Flask**
-* **Flask-SQLAlchemy**
-* **Jinja2 (templates HTML)**
-* **Bootstrap** (estilização)
+Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC**, com CRUD para **Professores, Turmas e Alunos**, persistência em banco de dados **SQLite** via **SQLAlchemy**, documentação automática em **Swagger** e aplicação conteinerizada em **Docker**.
 
 ---
 
-## 🔑 Principais Funcionalidades
+## 🛠️ Tecnologias utilizadas
 
-### 👩‍🎓 Aluno
-
-* Criar aluno
-* Listar alunos
-* Editar aluno
-* Excluir aluno
-* Relacionar aluno com **Turma**
-* Campos extras: notas e média final
-
-### 👨‍🏫 Professor
-
-* Criar professor
-* Listar professores
-* Editar professor
-* Excluir professor
-
-
-### 👨‍🏫 Turma (Não concluido)
-
-* Criar Turma
-* Listar Turma
-* Editar Turma
-* Excluir Turma
+* [Flask](https://flask.palletsprojects.com/)
+* [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com/)
+* [Flasgger (Swagger UI)](https://github.com/flasgger/flasgger)
+* [SQLite](https://www.sqlite.org/)
+* [Docker](https://www.docker.com/)
 
 ---
 
-## 🛠️ Exemplos de Rotas
+## 📂 Estrutura do Projeto (MVC)
 
-### Aluno
-
-* `GET /alunos` → Lista alunos
-* `GET /alunos/cadastrar` → Formulário para cadastrar
-* `POST /alunos/criar_aluno` → Cria aluno
-* `GET|POST /alunos/editar/<nome>` → Edita aluno
-* `POST /alunos/excluir/<nome>` → Exclui aluno
-
-### Professor
-
-* `GET /professor` → Lista professores
-* `POST /professor/cadastrar` → Formulário para cadastrar
-* `POST /professor/criar_professor` → Cria professor
-* `GET|POST /professor/editar/<nome>` → Edita professor
-* `POST /professor/excluir/<nome>` → Exclui professor
+```
+/projeto
+│── app.py                # Ponto de entrada da aplicação
+│── requirements.txt       # Dependências
+│── Dockerfile             # Configuração do container
+│── /model                 # Modelos do banco (SQLAlchemy)
+│    ├── database.py
+│    ├── professor.py
+│    ├── turma.py
+│    └── aluno.py
+│── /controller            # Regras de negócio
+│    ├── professor_controller.py
+│    ├── turma_controller.py
+│    └── aluno_controller.py
+│── /routes                # Rotas da API
+│    ├── professor_routes.py
+│    ├── turma_routes.py
+│    └── aluno_routes.py
+│── /static                # Arquivos estáticos (se necessário)
+│── /templates             # Templates HTML (se necessário)
+└── README.md              # Documentação
+```
 
 ---
 
+## 🚀 Como rodar o projeto
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/flask-mvc-api.git
+cd flask-mvc-api
+```
+
+### 2. Criar e ativar ambiente virtual (opcional, se não for usar Docker)
+
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
+
+### 3. Instalar dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Rodar a aplicação (sem Docker)
+
+```bash
+flask run
+```
+
+A aplicação ficará disponível em: [http://localhost:5000](http://localhost:5000)
+
+### 5. Rodar a aplicação com Docker 🐳
+
+```bash
+# Build da imagem
+docker build -t flask-mvc-api .
+
+# Rodar o container
+docker run -p 5000:5000 flask-mvc-api
+```
+
 ---
 
-## 📦 Como rodar o projeto
+## 📖 Documentação da API (Swagger)
 
-1. Clonar o repositório
+Após iniciar a aplicação, acesse:
+👉 [http://localhost:5000/apidocs](http://localhost:5000/apidocs)
 
-   ```bash
-   git clone <link>
-   cd projeto-escola
-   ```
+Lá você verá todos os endpoints organizados.
 
-2. Criar ambiente virtual
+---
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Linux/Mac
-   venv\Scripts\activate     # Windows
-   ```
+## 📌 Endpoints Principais
 
-3. Instalar dependências
+### Professores (`/professores`)
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+* `GET /professores` → Lista todos os professores
+* `POST /professores` → Cria novo professor
+* `PUT /professores/{id}` → Atualiza professor
+* `DELETE /professores/{id}` → Remove professor
 
-4. Rodar a aplicação
+### Turmas (`/turmas`)
 
-   ```bash
-   flask run
-   ```
+* `GET /turmas` → Lista todas as turmas
+* `POST /turmas` → Cria nova turma
+* `PUT /turmas/{id}` → Atualiza turma
+* `DELETE /turmas/{id}` → Remove turma
 
-Acesse em: [http://localhost:5000](http://localhost:5000)
+### Alunos (`/alunos`)
+
+* `GET /alunos` → Lista todos os alunos
+* `POST /alunos` → Cria novo aluno
+* `PUT /alunos/{id}` → Atualiza aluno
+* `DELETE /alunos/{id}` → Remove aluno
 
 ---
