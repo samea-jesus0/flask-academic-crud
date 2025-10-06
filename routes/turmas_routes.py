@@ -15,10 +15,24 @@ definitions:
     properties:
       id:
         type: integer
-        description: ID do professor.
+        description: ID único do professor.
+        example: 1
       nome:
         type: string
-        description: Nome do professor.
+        description: Nome completo do professor.
+        example: "Dr. Carlos Andrade"
+      idade:
+        type: integer
+        description: Idade do professor.
+        example: 45
+      materia:
+        type: string
+        description: Matéria principal que o professor leciona.
+        example: "Matemática Avançada"
+      observacoes:
+        type: string
+        description: Quaisquer observações ou notas adicionais sobre o professor.
+        example: "Coordenador do departamento de ciências exatas."
   Turma:
     type: object
     properties:
@@ -38,6 +52,37 @@ definitions:
         type: boolean
         description: Indica se a turma está ativa ou não.
         example: true
+  Aluno:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: ID do aluno.
+      nome:
+        type: string
+        description: Nome completo do aluno.
+      idade:
+        type: integer
+        description: Idade do aluno.
+      turma_id:
+        type: integer
+        description: ID da turma à qual o aluno pertence.
+      data_nascimento:
+        type: string
+        format: date
+        description: Data de nascimento do aluno (YYYY-MM-DD).
+      nota_primeiro_semestre:
+        type: number
+        format: float
+        description: Nota do primeiro semestre.
+      nota_segundo_semestre:
+        type: number
+        format: float
+        description: Nota do segundo semestre.
+      media_final:
+        type: number
+        format: float
+        description: Média final do aluno.
 """
 
 @turmas_bp.route("/")

@@ -12,44 +12,95 @@ alunos_bp = Blueprint("aluno_rota", __name__, url_prefix="/alunos")
 
 """
 definitions:
-  Turma:
-    type: object
-    properties:
-      id:
-        type: integer
-        description: ID da turma.
-      descricao:
-        type: string
-        description: Descrição ou nome da turma.
-      professor_id:
-        type: integer
-        description: ID do professor associado.
-      ativo:
-        type: boolean
-        description: Status da turma.
   Professor:
     type: object
     properties:
       id:
         type: integer
+        description: ID único do professor.
+        example: 1
       nome:
         type: string
+        description: Nome completo do professor.
+        example: "Dr. Carlos Andrade"
+      idade:
+        type: integer
+        description: Idade do professor.
+        example: 45
+      materia:
+        type: string
+        description: Matéria principal que o professor leciona.
+        example: "Matemática Avançada"
+      observacoes:
+        type: string
+        description: Quaisquer observações ou notas adicionais sobre o professor.
+        example: "Coordenador do departamento de ciências exatas."
+  Turma:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: ID único da turma.
+        example: 101
+      descricao:
+        type: string
+        description: Descrição ou nome da turma.
+        example: "3º Ano B - Matutino"
+      professor_id:
+        type: integer
+        description: ID do professor responsável pela turma.
+        example: 5
+      ativo:
+        type: boolean
+        description: Indica se a turma está ativa ou não.
+        example: true
+  Aluno:
+    type: object
+    properties:
+      id:
+        type: integer
+        description: ID do aluno.
+      nome:
+        type: string
+        description: Nome completo do aluno.
+      idade:
+        type: integer
+        description: Idade do aluno.
+      turma_id:
+        type: integer
+        description: ID da turma à qual o aluno pertence.
+      data_nascimento:
+        type: string
+        format: date
+        description: Data de nascimento do aluno (YYYY-MM-DD).
+      nota_primeiro_semestre:
+        type: number
+        format: float
+        description: Nota do primeiro semestre.
+      nota_segundo_semestre:
+        type: number
+        format: float
+        description: Nota do segundo semestre.
+      media_final:
+        type: number
+        format: float
+        description: Média final do aluno.
 """
 
 @alunos_bp.route("/")
 def listar_alunos():
-    """Lista todas as turmas e professores
-    Esta rota exibe uma página HTML com a lista de todas as turmas cadastradas.
+    """Lista todos os alunos cadastrados
+    Esta rota exibe uma página HTML com a lista de todos os alunos.
     ---
     tags:
-      - Turmas
+      - Alunos
     responses:
       200:
-        description: Página com a lista de turmas e o formulário de cadastro.
+        description: Página com a lista de alunos.
         schema:
           type: array
           items:
-            $ref: '#/'
+            $ref: '#/definitions/Aluno'
       500:
         description: Erro interno no servidor.
     """
@@ -58,13 +109,13 @@ def listar_alunos():
 
 @alunos_bp.route("/cadastrar")
 def cadastrar_aluno():
-    """Exibe o formulário de cadastro de nova turma
+    """Exibe o formulário de cadastro de novo aluno
     ---
     tags:
-      - Turmas
+      - Alunos
     responses:
       200:
-        description: Página HTML com o formulário para criar uma nova turma.
+        description: Página HTML com o formulário para criar um novo aluno.
       500:
         description: Erro interno no servidor.
     """
@@ -73,29 +124,51 @@ def cadastrar_aluno():
 
 @alunos_bp.route("/criar_aluno", methods=["GET", "POST"])
 def criar_aluno():
-    """Cria uma nova turma
-    Recebe os dados do formulário e cria uma nova turma no banco de dados.
+    """Cria um novo aluno
+    Recebe os dados do formulário e cria um novo aluno no banco de dados.
     ---
     tags:
-      - Turmas
+      - Alunos
     parameters:
-      - name: descricao
+      - name: nome
         in: formData
         type: string
         required: true
-        description: Descrição ou nome da turma.
-      - name: professor
+        description: Nome completo do aluno.
+      - name: idade
         in: formData
         type: integer
         required: true
-        description: ID do professor selecionado.
-      - name: ativo
+        description: Idade do aluno.
+      - name: turmas
         in: formData
-        type: boolean
-        description: Marque se a turma estiver ativa.
+        type: integer
+        required: true
+        description: ID da turma selecionada.
+      - name: data_nasc
+        in: formData
+        type: string
+        format: date
+        required: true
+        description: Data de nascimento (formato YYYY-MM-DD).
+      - name: nota_semestre_um
+        in: formData
+        type: number
+        required: true
+        description: Nota do primeiro semestre.
+      - name: nota_semestre_dois
+        in: formData
+        type: number
+        required: true
+        description: Nota do segundo semestre.
+      - name: media_final
+        in: formData
+        type: number
+        required: true
+        description: Média final do aluno.
     responses:
       302:
-        description: Redireciona para a lista de turmas após a criação com sucesso.
+        description: Redireciona para a lista de alunos após a criação com sucesso.
       400:
         description: Dados do formulário inválidos.
     """
@@ -115,35 +188,52 @@ def criar_aluno():
 
 @alunos_bp.route("/editar/<nome>", methods=["GET", "POST"])
 def editar_aluno(nome):
-    """Exibe o formulário de edição (GET) ou atualiza uma turma (POST)
+    """Exibe o formulário de edição (GET) ou atualiza um aluno (POST)
     ---
     tags:
-      - Turmas
+      - Alunos
     parameters:
-      - name: descricao
+      - name: nome
         in: path
         type: string
         required: true
-        description: A descrição da turma que será editada.
-      - name: descricao
+        description: O nome do aluno que será editado.
+      - name: nome
         in: formData
         type: string
-        description: Novo nome/descrição da turma (usado no POST).
-      - name: professor
+        description: Novo nome do aluno (usado no POST).
+      - name: idade
         in: formData
         type: integer
-        description: Novo ID do professor (usado no POST).
-      - name: ativo
+        description: Nova idade do aluno (usado no POST).
+      - name: turmas
         in: formData
-        type: boolean
-        description: Novo status da turma (usado no POST).
+        type: integer
+        description: Novo ID da turma do aluno (usado no POST).
+      - name: data_nasc
+        in: formData
+        type: string
+        format: date
+        description: Nova data de nascimento (YYYY-MM-DD) (usado no POST).
+      - name: nota_semestre_um
+        in: formData
+        type: number
+        description: Nova nota do primeiro semestre (usado no POST).
+      - name: nota_semestre_dois
+        in: formData
+        type: number
+        description: Nova nota do segundo semestre (usado no POST).
+      - name: media_final
+        in: formData
+        type: number
+        description: Nova média final (usado no POST).
     responses:
       200:
         description: (GET) Retorna o formulário de edição pré-preenchido.
       302:
-        description: (POST) Redireciona para a lista de turmas após a atualização.
+        description: (POST) Redireciona para a lista de alunos após a atualização.
       404:
-        description: Turma não encontrada.
+        description: Aluno não encontrado.
     """
     turmas = TurmaController.index()
     aluno = Aluno.query.filter_by(nome=nome).first()
@@ -168,22 +258,22 @@ def editar_aluno(nome):
 
 @alunos_bp.route("/deletar/<nome>")
 def deletar_aluno(nome):
-    """Deleta uma turma
-    Encontra uma turma pela descrição e a remove do banco de dados.
+    """Deleta um aluno
+    Encontra um aluno pelo nome e o remove do banco de dados.
     ---
     tags:
-      - Turmas
+      - Alunos
     parameters:
-      - name: descricao
+      - name: nome
         in: path
         type: string
         required: true
-        description: A descrição da turma a ser deletada.
+        description: O nome do aluno a ser deletado.
     responses:
       302:
-        description: Redireciona para a lista de turmas após a deleção.
+        description: Redireciona para a lista de alunos após a deleção.
       404:
-        description: Turma não encontrada.
+        description: Aluno não encontrado.
     """
     aluno = Aluno.query.filter_by(nome=nome).first()
     if nome:
