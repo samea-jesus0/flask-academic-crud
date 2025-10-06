@@ -237,7 +237,10 @@ def deletar_professor(nome):
     """
     professor = Professor.query.filter_by(nome=nome).first()
     if professor:
-        ProfessorController.delete(professor.id)
-        flash("Professor deletado!")
+        try:
+            ProfessorController.delete(professor.id)
+            flash("Professor deletado!")
+        except Exception as e:
+            flash(str(e))  
     return redirect(url_for('professor_rota.listar_professores'))
 

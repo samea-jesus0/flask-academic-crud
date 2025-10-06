@@ -10,6 +10,9 @@ class ProfessorController:
     @staticmethod
     def delete(id):
         professor = Professor.query.filter_by(id=id).first()
-        if professor:
-            db.session.delete(professor)
-            db.session.commit()
+        if professor.turmas:
+            raise Exception("Não é possível deletar professor que possui turmas.")
+        
+        db.session.delete(professor)
+        db.session.commit()
+        return True 

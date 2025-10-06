@@ -229,6 +229,9 @@ def deletar_turma(descricao):
     """
     turma = Turma.query.filter_by(descricao=descricao).first()
     if turma:
+      try:
         TurmaController.delete(turma.id)
         flash("Turma deletada!")
+      except Exception as e:
+        flash(str(e))
     return redirect(url_for('turma_rota.listar_turmas'))

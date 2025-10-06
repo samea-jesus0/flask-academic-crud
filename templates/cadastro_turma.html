@@ -4,13 +4,13 @@
       <form method="POST" action="{% if turma %}{{ url_for('turma_rota.editar_turma', descricao=turma.descricao) }}{% else %}{{ url_for('turma_rota.criar_turma') }}{% endif %}">
 
 
-        <!-- Descrição -->
+
         <div class="mb-3">
           <label class="form-label">Descrição da Turma</label>
           <input class="form-control" type="text" name="descricao" value="{{ turma.descricao if turma else '' }}" required>
         </div>
 
-        <!-- Professores -->
+        
         <fieldset class="mb-3">
           <legend class="col-form-label pt-0">Selecione um professor:</legend>
           {% for professor in professores %}
@@ -21,13 +21,13 @@
           {% endfor %}
         </fieldset>
 
-        <!-- Ativo -->
+        
         <div class="form-check mb-3">
           <input class="form-check-input" id="checkbox-ativo" type="checkbox" name="ativo" {% if turma and turma.ativo %}checked{% endif %}>
           <label class="form-check-label" for="checkbox-ativo">Ativo</label>
         </div>
 
-        <!-- Botão -->
+        
         <button class="btn btn-primary w-100" type="submit">Enviar</button>
 
       </form>
