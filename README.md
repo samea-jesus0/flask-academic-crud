@@ -3,6 +3,8 @@
 
 Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC**, com CRUD para **Professores, Turmas e Alunos**, persistência em banco de dados **SQLite** via **SQLAlchemy**, documentação automática em **Swagger** e aplicação conteinerizada em **Docker**.
 
+- Para criar uma turma é necessário existir pelo menos um professor e para criar um aluno é preciso ter uma turma existente.
+
 ---
 
 ## 🛠️ Tecnologias utilizadas
