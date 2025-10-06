@@ -102,7 +102,7 @@ def criar_aluno():
     novo_aluno = Aluno (
         nome=request.form["nome"],
         idade = int(request.form["idade"]),
-        turma_id = request.form["turmas"],
+        turma_id = request.form["turma"],
         data_nascimento = datetime.strptime(request.form["data_nasc"], "%Y-%m-%d").date(),
         nota_primeiro_semestre = float(request.form["nota_semestre_um"]),
         nota_segundo_semestre = float(request.form["nota_semestre_dois"]),
@@ -111,7 +111,7 @@ def criar_aluno():
 
     db.session.add(novo_aluno)
     db.session.commit()
-    redirect(url_for("aluno_rota.listar_alunos"))
+    return redirect(url_for("aluno_rota.listar_alunos"))
 
 @alunos_bp.route("/editar/<nome>", methods=["GET", "POST"])
 def editar_aluno(nome):
@@ -154,8 +154,8 @@ def editar_aluno(nome):
     if request.method == "POST":
         aluno.nome = request.form["nome"]
         aluno.idade = int(request.form["idade"])
-        aluno.turma_id = request.form["turmas"]
-        aluno.data_nascimento = request.form["data_nasc"]
+        aluno.turma_id = request.form["turma"]
+        aluno.data_nascimento = datetime.strptime(request.form["data_nasc"], "%Y-%m-%d").date()
         aluno.nota_primeiro_semestre = request.form["nota_semestre_um"]
         aluno.nota_segundo_semestre = request.form["nota_semestre_dois"]
         aluno.media_final = request.form["media_final"]

@@ -5,31 +5,31 @@
         <input class="form-control" type="text" id="nome_aluno" name="nome" value="{{ aluno.nome if aluno else '' }}" required>
 
         <label class="form-label" for="idade_aluno">Idade </label>
-        <input class="form-control" id="idade_aluno" type="number" name="idade"required>
+        <input class="form-control" id="idade_aluno" type="number" name="idade" value="{{ aluno.idade if aluno else '' }}" required>
 
         <fieldset>
           <legend>Selecione uma turma: </legend>
 
-          {% for turma in turmas %}
-          <div>
-            <input class="form-control" type="radio" id="turmas" name="turma" value="{{ turma.id }}" {% if loop.first %}checked{% endif %}/>
-            <label class="form-label" for="turmas">{{ turma.descricao }}</label>
-          </div>
-          {% endfor %}
+            {% for turma in turmas %}
+              <div>
+                <input type="radio" id="turma_{{ turma.id }}" name="turma" value="{{ turma.id }}" {% if loop.first %}checked{% endif %}>
+                <label for="turma_{{ turma.id }}">{{ turma.descricao }}</label>
+              </div>
+            {% endfor %}
 
         </fieldset>
 
         <label class="form-label" >Data de Nascimento</label>
-        <input class="form-control" type="date" name="data_nasc"required>
+        <input class="form-control" type="date" name="data_nasc" value="{{ aluno.data_nasc if aluno else '' }}" required>
 
         <label class="form-label">Nota do Primeiro Semestre</label>
-        <input class="form-control" type="number" name="nota_semestre_um">
+        <input class="form-control" type="number" name="nota_semestre_um" value="{{ aluno.nota_semestre_um if aluno else '' }}">
 
         <label class="form-label" >Nota do Segundo Semestre</label>
-        <input class="form-control" type="number" name="nota_semestre_dois">
+        <input class="form-control" type="number" name="nota_semestre_dois" value="{{ aluno.nota_semestre_dois if aluno else '' }}">
 
         <label class="form-label">Média Final</label>
-        <input class="form-control" type="text" name="media_final">
+        <input class="form-control" type="text" name="media_final" value="{{ aluno.media_final if aluno else '' }}">
 
         <button class="btn btn-primary btn-block mb-4" type="submit"> Envie </button>
 

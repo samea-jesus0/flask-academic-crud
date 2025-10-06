@@ -1,7 +1,8 @@
 {% extends 'template.html' %}
 {% block conteudo %}
 
-      <form method="POST" action="{% if turma %}{{ url_for('turma_rota.editar_turma', nome=turma.descricao) }}{% else %}{{ url_for('turma_rota.criar_turma') }}{% endif %}">
+      <form method="POST" action="{% if turma %}{{ url_for('turma_rota.editar_turma', descricao=turma.descricao) }}{% else %}{{ url_for('turma_rota.criar_turma') }}{% endif %}">
+
 
         <!-- Descrição -->
         <div class="mb-3">
@@ -22,7 +23,7 @@
 
         <!-- Ativo -->
         <div class="form-check mb-3">
-          <input class="form-check-input" id="checkbox-ativo" type="checkbox" name="ativo" required>
+          <input class="form-check-input" id="checkbox-ativo" type="checkbox" name="ativo" {% if turma and turma.ativo %}checked{% endif %}>
           <label class="form-check-label" for="checkbox-ativo">Ativo</label>
         </div>
 
