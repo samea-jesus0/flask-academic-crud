@@ -22,10 +22,6 @@ app.config['SWAGGER'] = {
     'version': '1.0.0',
     'description': 'Documentação da API para gerenciar turmas e professores.',
     'termsOfService': '/termos',
-    'contact': {
-        'name': 'Seu Nome',
-        'email': 'seu@email.com'
-    },
     'license': {
         'name': 'MIT',
     }
