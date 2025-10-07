@@ -7,6 +7,14 @@ Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC*
 
 ---
 
+## ​🌸 Integrantes
+
+- Sâmea Silva | 2403698
+- Diogo Antonny | 2403813
+- Alessandra Shiguemori​ | 2404075
+
+---
+
 ## 🛠️ Tecnologias utilizadas
 
 * [Flask](https://flask.palletsprojects.com/)
@@ -37,8 +45,8 @@ Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC*
 │    ├── professor_routes.py
 │    ├── turma_routes.py
 │    └── aluno_routes.py
-│── /static                # Arquivos estáticos (se necessário)
-│── /templates             # Templates HTML (se necessário)
+│── /static                # bootstrap
+│── /templates             # Templates HTML
 └── README.md              # Documentação
 ```
 
