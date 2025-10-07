@@ -57,7 +57,7 @@ Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC*
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/flask-mvc-api.git
+git clone https://github.com/samea-jesus0/flask-academic-crud.git
 cd flask-mvc-api
 ```
 
