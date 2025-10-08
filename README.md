@@ -3,6 +3,16 @@
 
 Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC**, com CRUD para **Professores, Turmas e Alunos**, persistência em banco de dados **SQLite** via **SQLAlchemy**, documentação automática em **Swagger** e aplicação conteinerizada em **Docker**.
 
+- Para criar uma turma é necessário existir pelo menos um professor e para criar um aluno é preciso ter uma turma existente.
+
+---
+
+## ​🌸 Integrantes
+
+- Sâmea Silva | 2403698
+- Diogo Antonny | 2403813
+- Alessandra Shiguemori​ | 2404075
+
 ---
 
 ## 🛠️ Tecnologias utilizadas
@@ -35,8 +45,8 @@ Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC*
 │    ├── professor_routes.py
 │    ├── turma_routes.py
 │    └── aluno_routes.py
-│── /static                # Arquivos estáticos (se necessário)
-│── /templates             # Templates HTML (se necessário)
+│── /static                # bootstrap
+│── /templates             # Templates HTML
 └── README.md              # Documentação
 ```
 
@@ -47,7 +57,7 @@ Este projeto consiste em uma **API REST em Flask** estruturada no padrão **MVC*
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/flask-mvc-api.git
+git clone https://github.com/samea-jesus0/flask-academic-crud.git
 cd flask-mvc-api
 ```
 
